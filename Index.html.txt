@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For bebdi 💖</title>
+
+<style>
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    background: radial-gradient(circle at top, #ffd1dc, #ff5ea8);
+    overflow:hidden;
+  }
+
+  /* floating hearts */
+  .heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    opacity:.9;
+  }
+
+  @keyframes float{
+    from{transform:translateY(0) rotate(0deg)}
+    to{transform:translateY(-120vh) rotate(360deg)}
+  }
+
+  .card{
+    background: rgba(255,255,255,.9);
+    padding:24px;
+    border-radius:22px;
+    width:90%;
+    max-width:520px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    z-index:2;
+  }
+
+  h1{
+    font-size:28px;
+    margin:10px 0;
+  }
+
+  p{
+    opacity:.8;
+  }
+
+  .buttons{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    margin-top:18px;
+  }
+
+  button{
+    border:none;
+    padding:12px 22px;
+    font-size:16px;
+    border-radius:999px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+  }
+
+  .yes{
+    background:#22c55e;
+    color:white;
+  }
+
+  .no{
+    background:#111827;
+    color:white;
+    position:relative;
+  }
+
+  .secret{
+    display:none;
+    margin-top:22px;
+    animation:pop .4s ease;
+  }
+
+  @keyframes pop{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:none}
+  }
+
+  .note{
+    background:white;
+    padding:12px;
+    border-radius:14px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+
+  .photos{
+    display:grid;
+    gap:12px;
+    margin-top:12px;
+  }
+
+  @media(min-width:500px){
+    .photos{grid-template-columns:1fr 1fr}
+  }
+
+  .photos img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border-radius:14px;
+  }
+
+  .from{
+    margin-top:8px;
+    font-weight:700;
+    opacity:.8;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Hey bebdi 💕<br>Will you be my Valentine?</h1>
+  <p>You can’t escape this 😄</p>
+
+  <div class="buttons">
+    <button class="yes" id="yesBtn">Yes 💖</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+
+  <div class="secret" id="secret">
+    <h2>YAY!! 🥰💞</h2>
+
+    <div class="note">
+      Bebdi ❤️  
+      You just made me the happiest person alive.  
+      Happy Valentine’s Day 💕
+    </div>
+
+    <div class="from">— Saransh</div>
+
+    <div class="photos">
+      <img src="photos/1.jpg">
+      <img src="photos/2.jpg">
+    </div>
+  </div>
+</div>
+
+<script>
+  // floating hearts
+  const hearts = ["💖","💘","💕","💗","❤️"];
+  for(let i=0;i<25;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=14+Math.random()*20+"px";
+    h.style.animationDuration=4+Math.random()*4+"s";
+    h.style.animationDelay=Math.random()*5+"s";
+    document.body.appendChild(h);
+  }
+
+  const yesBtn=document.getElementById("yesBtn");
+  const noBtn=document.getElementById("noBtn");
+  const secret=document.getElementById("secret");
+
+  yesBtn.addEventListener("click",()=>{
+    secret.style.display="block";
+    yesBtn.textContent="I knew it bebdi 😘💖";
+    noBtn.style.display="none";
+    if(navigator.vibrate) navigator.vibrate([50,50,50]);
+  });
+
+  noBtn.addEventListener("touchstart",moveNo);
+  noBtn.addEventListener("mouseenter",moveNo);
+
+  function moveNo(){
+    const pad=20;
+    const x=Math.random()*(window.innerWidth-noBtn.offsetWidth-pad);
+    const y=Math.random()*(window.innerHeight-noBtn.offsetHeight-pad);
+    noBtn.style.position="fixed";
+    noBtn.style.transition="left .15s ease, top .15s ease";
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+  }
+</script>
+
+</body>
+</html>
